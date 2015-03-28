@@ -1,0 +1,3 @@
+Some basic tests for atomic rings.  Compiles on most systems with pthreads.  On systems without pthreads, the tests will need to be re-written.
+
+If the tests hang or print a message about everything failing, atomic rings are broken on your platform.  This shouldn't happen.  Please let me know so I can look at it.
