@@ -38,7 +38,7 @@ This may also be true:
 * Atomic rings are wait-free.
 
 ## Technical details
-This code uses the atomic operations introduced in the C11 standard.  Which functionally means that without gcc-4.9 or later or clang 3.3 or later, you're going to have a bad time.  However, if you are having a bad time, do look in the compat/ directory, where I've placed a copy of a stdatomic.h header file from FreeBSD that invokes the atomics routines in earlier versions of the compilers.  It's a bad idea, but if you're having a bad time, maybe two bads make a good.
+This code uses the atomic operations introduced in the C11 standard.  Which functionally means that without gcc-4.9 or later or clang 3.3 or later, you're going to have a bad time.  However, if you are having a bad time, do look in the compat/ directory, where I've placed a copy of a `stdatomic.h` header file from FreeBSD that invokes the atomics routines in earlier versions of the compilers.  It's a bad idea, but if you're having a bad time, maybe two bads make a good.
 
 ## Use
 You can just drop this code into your project tree and use it.  The makefile shows one good way to compile it.  This code is public domain or unlicense licensed in jurisdictions that public domain does not exist, with the exception of the files in the compat/ directory, which are from different projects, are copyright of their respective owners and are licensed under the terms included at the top of each file.
@@ -49,11 +49,11 @@ This code provides the following functions:
 ### int aring_init(struct atomic_ring * aring, unsigned int size)
 This function initializes the atomic ring pointed to by `aring`, with the capacity specified by `size`.  Size cannot exceed the maximum value able to be represented by an `unsigned int` on the platform.
 
-This function is not thread safe and can only be used once, in one thread, to initialize one atomic ring.
+This function is not thread safe and should only be used to initialize an atomic ring once.
 
 This function returns:
 * 0, on success.
-* -1, if an error happened during the creation of the ring.  There are very few circumstances which could cause this.  The code in `aring_init` returns immediately on an error.  This means that on platforms that support errno it will likely be preserved and perror() can be called to determine what went wrong.
+* -1, if an error happened during the creation of the ring.  There are very few circumstances which could cause this.  The code in `aring_init` returns immediately on an error.  This means that on platforms that support `errno` it will likely be preserved and `perror()` can be called to determine what went wrong.
 
 ### int aring_give(struct atomic_ring * aring, void * item)
 This function adds a pointer to `item` to the atomic ring specified by `aring`.  This function should only ever be called by a single thread (commonly called the producer thread) for each atomic ring.  Calling this function from any other thread is unsafe.
@@ -73,13 +73,13 @@ This function returns:
 This function can be used to determine how many items are currently in the atomic ring pointed to by `aring`.  It may be safely used from any thread, so long as the atomic ring has already been successfully initialized with `aring_init()`.
 
 This function returns:
-* The number of items that the atomic ring pointed to by aring contains.
+* The number of items in the atomic ring.
 
 ### unsigned int aring_capacity(struct atomic_ring * aring)
 This function can be used to determine the total capacity of the atomic ring pointed to by `aring`.  This number does not change until the atomic ring is destroyed.  It may be safely used from any thread, so long as the atomic ring has already been successfully initialized with `aring_init()`.
 
 This function returns:
-* The number of items that the atomic ring pointed to by aring can store in total.
+* The number of items that the atomic ring can store in total.
 
 ### int aring_free(struct atomic_ring * aring)
 This function frees the ring buffer for the atomic ring pointed to by `aring` and sets the capacity to zero.  Subsequent calls to atomic ring code using this atomic ring will produce bad results and may even crash.  This function should only be called before a program destroys the atomic ring.
@@ -96,4 +96,4 @@ This is a whiteboard diagram for the atomic ring.  One thread in red, other thre
 ![Atomic Ring Diagram](https://raw.github.com/djcapelis/atomic-ring/master/doc/diagram.jpg)
 
 ## Report Bugs
-If you find bugs, I'd love to hear about them.  My website at http://capelis.dj has information on how to reach me.
+If you find bugs, I'd love to hear about them.  My website at http://capelis.dj has information on how to reach me.  You can also file bug reports via github's issue tracker.

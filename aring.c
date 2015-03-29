@@ -1,12 +1,13 @@
-/******************************************************************
- * aring.h
+/*************************************************************************
+ * aring.c
  *
- * This is the header file for all atomic ring functions.
+ * This file implements all the atomic ring functions.
+ * You should look at the README.md file for documentation about them!
  *
  * Licensed under the included terms (unlicense)
  *
  * D J Capelis, 2015
- *****************************************************************/
+ ************************************************************************/
 
 #include<stdlib.h>
 #include"aring.h"
