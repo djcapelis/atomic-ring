@@ -1,7 +1,7 @@
 # Atomic Ring
 Some code in C that allows one thread to pass items to another thread without locking
 
-## Important notes
+## Important Notes
 You should be aware of the following things:
 * ~~This code has not been tested.~~
 * This code has not been proved.
@@ -37,7 +37,7 @@ And the following things are also *hopefully* true:
 This may also be true:
 * Atomic rings are wait-free.
 
-## Technical details
+## Technical Details
 This code uses the atomic operations introduced in the C11 standard.  Which functionally means that without gcc-4.9 or later or clang 3.3 or later, you're going to have a bad time.  However, if you are having a bad time, do look in the compat/ directory, where I've placed a copy of a `stdatomic.h` header file from FreeBSD that invokes the atomics routines in earlier versions of the compilers.  It's a bad idea, but if you're having a bad time, maybe two bads make a good.
 
 ## Use
@@ -93,7 +93,11 @@ See the tests/ directory for short minimal code that uses atomic rings.
 
 ## Diagram
 This is a whiteboard diagram for the atomic ring.  One thread in red, other thread in blue, shared state in brown.  Memory barriers in dashed lines with mb, implemented in the code using C11 `_release` `_acquire` semantics on accessing the items field.
+
 ![Atomic Ring Diagram](https://raw.github.com/djcapelis/atomic-ring/master/doc/diagram.jpg)
 
 ## Report Bugs
 If you find bugs, I'd love to hear about them.  My website at http://capelis.dj has information on how to reach me.  You can also file bug reports via github's issue tracker.
+
+## Other Small C Libraries
+Like small libraries like this one?  Want to find more?  You'll love this list: https://github.com/nothings/stb/blob/master/docs/other_libs.md
