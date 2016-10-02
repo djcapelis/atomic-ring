@@ -17,9 +17,9 @@ void * consumer(void * v);
 int main()
 {
 	pthread_t t;
-	a = calloc(1, sizeof a);
+	a = calloc(1, sizeof * a);
 	aring_init(a, SIZE);
-	sleepytime = calloc(1, sizeof sleepytime);
+	sleepytime = calloc(1, sizeof * sleepytime);
 	sleepytime->tv_nsec = NSLEEP;
 	pthread_create(&t, NULL, &consumer, NULL);
 	producer(NULL);
